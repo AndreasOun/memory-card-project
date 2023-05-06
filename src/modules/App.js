@@ -9,46 +9,67 @@ import F from '../images/F.PNG';
 import G from '../images/G.PNG';
 import H from '../images/H.PNG';
 
-
-
 const CARD_VALUES = [A, B, C, D, E, F, G, H];
 
 function Card({ value, isFlipped, onClick }) {
-    return (
-      <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={onClick}>
-        <img src={isFlipped ? value : 'https://via.placeholder.com/150x150.png?text=Black'} alt={value} />
-      </div>
-    );
-  }
+  return (
+    <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={onClick}>
+      <img src={isFlipped ? value : 'https://via.placeholder.com/150x150.png?text=Black'} alt={value} />
+    </div>
+  );
+}
 
-function Board({ size }) {
-  const [cards, setCards] = useState([]);
-  const [flippedCards, setFlippedCards] = useState([]);
-  const [matchedCards, setMatchedCards] = useState([]);
 
-  useEffect(() => {
-    const shuffledValues = shuffle(CARD_VALUES.slice(0, size / 2));
-    const pairs = shuffledValues.concat(shuffledValues);
-    setCards(shuffle(pairs).map((value) => ({ value, isFlipped: false })));
-    setFlippedCards([]);
-    setMatchedCards([]);
-  }, [size]);
 
-  
+function Board({ level, setLevel }) {
+    const [cards, setCards] = useState([]);
+    const [flippedCards, setFlippedCards] = useState([]);
+    const [matchedCards, setMatchedCards] = useState([]);
+    const size = 2 * level + 2;
+
+    useEffect(() => {
+        const shuffledValues = shuffle(CARD_VALUES.slice(0, size / 2));
+        const pairs = shuffledValues.concat(shuffledValues);
+        const initialCards = shuffle(pairs).map((value) => ({
+          value,
+          isFlipped: false,
+        }));
+        setCards(initialCards);
+        setFlippedCards([]);
+        setMatchedCards([]);
+      }, [size]);
+
+      useEffect(() => {
+        if (matchedCards.length === size) {
+          setLevel(level + 1);
+          setCards([]);
+          setFlippedCards([]);
+          setMatchedCards([]);
+        } else if (flippedCards.length === 2) {
+          setTimeout(() => {
+            setFlippedCards([]);
+          }, 1000);
+        }
+      }, [matchedCards, size, level, setLevel, flippedCards, setFlippedCards]);
 
   function handleClick(index) {
     const flipped = flippedCards.length;
-  
+
     // If two cards are already flipped, ignore any further clicks
     if (flipped === 2) {
       return;
     }
-  
+
+    // If the clicked card is already flipped, do nothing
+    if (cards[index].isFlipped) {
+      return;
+    }
+
     // Flip the clicked card
     const newCards = [...cards];
     newCards[index].isFlipped = true;
     setCards(newCards);
-  
+
     // If no cards are currently flipped, just update the state with the index of the clicked card
     if (flipped === 0) {
       setFlippedCards([index]);
@@ -57,7 +78,7 @@ function Board({ size }) {
       const firstIndex = flippedCards[0];
       const card1 = cards[firstIndex];
       const card2 = cards[index];
-  
+
       if (card1.value === card2.value) {
         // If the values match, add the cards to the matchedCards array and clear the flippedCards array
         setMatchedCards([...matchedCards, card1.value]);
@@ -75,9 +96,16 @@ function Board({ size }) {
   }
 
   function resetGame() {
+    const shuffledValues = shuffle(CARD_VALUES.slice(0, size / 2));
+    const pairs = shuffledValues.concat(shuffledValues);
+    const initialCards = shuffle(pairs).map((value) => ({
+      value,
+      isFlipped: false,
+    }));
+    setLevel(1);
+    setCards(initialCards);
     setFlippedCards([]);
     setMatchedCards([]);
-    setCards([]);
   }
 
   function shuffle(array) {
@@ -102,7 +130,6 @@ function Board({ size }) {
         ))}
       </div>
       <div className="game-info">
-        <div>Score: {matchedCards.length}</div>
         <button onClick={resetGame}>Reset</button>
       </div>
     </>
@@ -110,27 +137,36 @@ function Board({ size }) {
 }
 
 function App() {
-  const [boardSize, setBoardSize] = useState(8);
-
-  function handleSizeChange(event) {
-    setBoardSize(Number(event.target.value));
+    const [level, setLevel] = useState(1);
+  
+    function handleLevelChange(newLevel) {
+      setLevel(newLevel);
+    }
+  
+    return (
+      <div className="app">
+        <h1>Memory Game</h1>
+        <Board level={level} setLevel={setLevel} />
+        <div className="level-changer">
+          <label htmlFor="level">Select Level:</label>
+          <select
+            name="level"
+            id="level"
+            onChange={(e) => handleLevelChange(parseInt(e.target.value))}
+          >
+            <option value={1}>Level 1</option>
+            <option value={2}>Level 2</option>
+            <option value={3}>Level 3</option>
+            <option value={4}>Level 4</option>
+            <option value={5}>Level 5</option>
+            <option value={6}>Level 6</option>
+            <option value={7}>Level 7</option>
+          </select>
+        </div>
+      </div>
+    );
   }
 
-  return (
-    <div className="app">
-      <h1>Memory Card Game</h1>
-      <label htmlFor="board-size">Board Size:</label>
-      <input
-        id="board-size"
-        type="number"
-        value={boardSize}
-        min={4}
-        max={16}
-        onChange={handleSizeChange}
-      />
-      <Board size={boardSize} />
-    </div>
-  );
-}
+
 
 export default App;

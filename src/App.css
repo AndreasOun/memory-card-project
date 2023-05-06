@@ -1,6 +1,6 @@
 /* Set the font and background color for the entire page */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Luckiest Guy', cursive;
     background-color: #F8F8FF;
   }
   
@@ -70,18 +70,16 @@ body {
   
   /* Style the game information container */
   .game-info {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: #FFF;
-    border-radius: 5px;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
   }
   
   /* Style the reset button */
   button {
-    font-size: 1.5rem;
+    height: 100px;
+    width: 200px;
+    font-size: 44px;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     border: none;
