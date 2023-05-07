@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import music from '../music/bg-music.mp3';
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 
 const BackgroundMusic = () => {
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(
+    localStorage.getItem('isMuted') === 'true'
+  );
 
   const handleToggleMute = () => {
     setIsMuted(!isMuted);
   };
+
+  useEffect(() => {
+    localStorage.setItem('isMuted', isMuted);
+  }, [isMuted]);
 
   const handleMusicEnd = (event) => {
     event.target.play();

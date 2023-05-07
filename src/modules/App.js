@@ -20,6 +20,7 @@ function App() {
   return (
     <div className="app">
       <h1>Memory Game</h1>  
+          <BackGroundMusic />
       <Board level={level} setLevel={setLevel} />
       <div className="level-changer">
         <div className="level-buttons">
@@ -42,7 +43,7 @@ function App() {
           </div>
         </div>
       )}
-      <BackGroundMusic />
+      
       <Footer />
     </div>
   );
