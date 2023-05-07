@@ -134,6 +134,18 @@ body {
     margin-right: 10px;
   }
 
+  #music-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin-left: 30px;
+    margin-bottom: 60px;
+  }
+
+  #music-btn:hover {
+    transform: scale(1.2);
+  }
+
   /* Mobile Styles */
 @media (max-width: 768px) {
   h1 {

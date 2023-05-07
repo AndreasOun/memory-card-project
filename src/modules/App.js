@@ -1,7 +1,8 @@
-import React, { useState} from 'react';
-import '../App.css'
+import React, { useState } from 'react';
+import '../App.css';
 import Board from './Board';
 import Footer from './Footer';
+import BackGroundMusic from './BackGroundMusic';
 
 function App() {
   const [level, setLevel] = useState(1);
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Memory Game</h1>
+      <h1>Memory Game</h1>  
       <Board level={level} setLevel={setLevel} />
       <div className="level-changer">
         <div className="level-buttons">
@@ -41,6 +42,7 @@ function App() {
           </div>
         </div>
       )}
+      <BackGroundMusic />
       <Footer />
     </div>
   );
