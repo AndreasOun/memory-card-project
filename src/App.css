@@ -1,9 +1,15 @@
-/* Set the font and background color for the entire page */
 body {
-    font-family: 'Luckiest Guy', cursive;
-    background-color: #F8F8FF;
-  }
-  
+  font-family: 'Luckiest Guy', cursive;
+  background-image: url('./images/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
   /* Center the app on the page */
   .app {
     max-width: 800px;
@@ -16,21 +22,9 @@ body {
     margin-top: 1rem;
     margin-bottom: 2rem;
     text-align: center;
-  }
-  
-  /* Style the board size label and input */
-  label {
-    font-size: 1.5rem;
-    margin-right: 1rem;
-  }
-  
-  input {
-    font-size: 1.5rem;
-    width: 3rem;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    color: white;
+    text-shadow: 2px 2px 4px black;
+    
   }
   
   /* Style the board container */
@@ -75,14 +69,19 @@ body {
     text-align: center;
   }
   
-  /* Style the reset button */
+  .level-buttons {
+     display: flex;
+     justify-content: center;
+     margin-bottom: 2rem;
+  }
+  
+
   button {
-    height: 100px;
-    width: 200px;
-    font-size: 44px;
+    font-size: 1.5rem;
     padding: 0.5rem 1rem;
-    border-radius: 5px;
+    margin: 0 1rem;
     border: none;
+    border-radius: 5px;
     background-color: #008CBA;
     color: #FFF;
     cursor: pointer;
@@ -92,3 +91,129 @@ body {
   button:hover {
     background-color: #006B85;
   }
+
+  .popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .level-popup {
+    background-color: #FFF;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    text-align: center;
+  }
+  
+
+  #footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .github-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  /* Mobile Styles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem; /* add padding to the left and right */
+    box-sizing: border-box; /* include padding and border in the element's total width */
+  }
+  
+  .board {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card {
+    width: 65px;
+    height: 65px;
+    margin: 0.3rem;
+  }
+
+  .game-info {
+    padding: 0.5rem;
+  }
+
+  .level-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 0.5rem;
+    max-width: 400px;
+    font-size: 1rem;
+    padding: 0.5rem 0.7rem;
+    
+  }
+  
+  
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem; /* add padding to the left and right */
+    box-sizing: border-box; /* include padding and border in the element's total width */
+  }
+
+  .board {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card {
+    width: 120px;
+    height: 120px;
+    margin: 0.4rem;
+  }
+
+  .game-info {
+    padding: 0.75rem;
+  }
+
+  .level-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 600px;
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+    margin: 0.5rem;
+  }
+}

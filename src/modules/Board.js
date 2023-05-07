@@ -86,19 +86,6 @@ function Board({ level, setLevel }) {
     }
   }
 
-  function resetGame() {
-    const shuffledValues = shuffle(CARD_VALUES.slice(0, size / 2));
-    const pairs = shuffledValues.concat(shuffledValues);
-    const initialCards = shuffle(pairs).map((value) => ({
-      value,
-      isFlipped: false,
-    }));
-    setLevel(1);
-    setCards(initialCards);
-    setFlippedCards([]);
-    setMatchedCards([]);
-  }
-
   function shuffle(array) {
     const copy = [...array];
     for (let i = copy.length - 1; i > 0; i--) {
@@ -119,9 +106,6 @@ function Board({ level, setLevel }) {
             onClick={() => handleClick(index)}
           />
         ))}
-      </div>
-      <div className="game-info">
-        <button onClick={resetGame}>Reset</button>
       </div>
     </>
   );
