@@ -14,3 +14,6 @@ Test the live site here:  https://andreasoun.github.io/memory-card-project
 
 ![Alt text](../../../../Downloads/logos/game.PNG)
 
+# Issues
+
+Background music doesn't work after refreshing. 
